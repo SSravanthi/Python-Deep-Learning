@@ -1,0 +1,8 @@
+Question-1:
+ There is a syntactical difference between python 2 and 3. Here are few of the things:
+1. print “hey” function in python 2 is replaced as print(“hey”)
+2. In python 2 the calculation rounds to a nearest whole number where as in python 3 it rounds to a exact integer. 
+Example: 5/2 = 2 - python 2
+	5/2 = 2.5 – python 3
+3. In python 2 the strings are stored as ASCII by default, in python 3 the strings are stored as Unicode by default.
+
