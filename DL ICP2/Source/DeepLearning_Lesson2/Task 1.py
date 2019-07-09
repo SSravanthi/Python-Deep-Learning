@@ -43,9 +43,6 @@ model.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['ac
 history = model.fit(train_data, train_labels_one_hot, batch_size=256, epochs=20, verbose=1,
                 validation_data=(test_data, test_labels_one_hot))
 
-#Saving the model
-model.save('mnist.h5')
-
 [test_loss, test_acc] = model.evaluate(test_data, test_labels_one_hot)
 print("Evaluation result on Test Data : Loss = {}, accuracy = {}".format(test_loss, test_acc))
 
@@ -64,17 +61,3 @@ plt.xlabel("Epoch #")
 plt.ylabel("Loss/Accuracy")
 plt.legend(loc="lower left")
 plt.savefig("plot.png")
-
-#loading and predicting the model
-model = load_model('mnist.h5')
-
-
-predictions = model.predict(test_data[[0],:], batch_size=1)
-print(predictions)
-
-predict_classes = model.predict_classes(test_data[[0],:])
-print(predict_classes)
-
-plt.imshow(test_images[0].reshape((28, 28)), cmap = 'gray')
-plt.title("This is:" + str(predict_classes[0]))
-plt.show()

@@ -4,11 +4,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 from keras.layers import Dense
 from keras.utils import to_categorical
+from keras.models import load_model
 
 (train_images,train_labels),(test_images, test_labels) = mnist.load_data()
 #display the first image in the training data
-plt.imshow(train_images[0,:,:],cmap='gray')
-plt.title('Ground Truth : {}'.format(train_labels[0]))
+#plt.imshow(train_images[0,:,:],cmap='gray')
+#plt.title('Ground Truth : {}'.format(train_labels[0]))
 # plt.show()
 
 #process the data
@@ -29,14 +30,23 @@ test_labels_one_hot = to_categorical(test_labels)
 
 #creating network
 model = Sequential()
-model.add(Dense(500, activation='tanh', input_shape=(dimData,)))
-model.add(Dense(500, activation='tanh'))
-model.add(Dense(500, activation='tanh'))
+model.add(Dense(512, activation='relu', input_shape=(dimData,)))
+model.add(Dense(512, activation='relu'))
+
+#Added layers
+model.add(Dense(450, activation='tanh'))
+model.add(Dense(650, activation='tanh'))
+
 model.add(Dense(10, activation='softmax'))
 
 model.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['accuracy'])
 history = model.fit(train_data, train_labels_one_hot, batch_size=256, epochs=20, verbose=1,
-                   validation_data=(test_data, test_labels_one_hot))
+                validation_data=(test_data, test_labels_one_hot))
 
 [test_loss, test_acc] = model.evaluate(test_data, test_labels_one_hot)
 print("Evaluation result on Test Data : Loss = {}, accuracy = {}".format(test_loss, test_acc))
+
+
+
+
+
